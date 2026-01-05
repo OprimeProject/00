@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0e27">
+    <title>ORSI - Assistente Pessoal</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🤖</span>
+                <h1>ORSI</h1>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Online</span>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="chat">💬 Chat</button>
+            <button class="nav-tab" data-tab="tools">🛠️ Ferramentas</button>
+            <button class="nav-tab" data-tab="config">⚙️ Config</button>
+            <button class="nav-tab" data-tab="about">ℹ️ Sobre</button>
+        </nav>
+
+        <!-- Chat Tab -->
+        <div class="tab-content active" id="chat-tab">
+            <div class="chat-container">
+                <div class="messages" id="messages">
+                    <div class="message assistant">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <p>Olá! Eu sou o <strong>ORSI</strong>, seu assistente pessoal completo.</p>
+                            <p>Como posso ajudá-lo hoje?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-area">
+                    <button class="voice-btn" id="voiceBtn" title="Comando de voz">
+                        🎤
+                    </button>
+                    <input type="text" id="messageInput" placeholder="Digite sua mensagem ou use o microfone..." />
+                    <button class="send-btn" id="sendBtn">
+                        ➤
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div class="tab-content" id="tools-tab">
+            <div class="tools-grid">
+                <div class="tool-card" onclick="window.orsi.getWeather()">
+                    <div class="tool-icon">🌤️</div>
+                    <h3>Clima</h3>
+                    <p>Previsão do tempo</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.getNews()">
+                    <div class="tool-icon">📰</div>
+                    <h3>Notícias</h3>
+                    <p>Últimas notícias</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.convertCurrency()">
+                    <div class="tool-icon">💱</div>
+                    <h3>Moedas</h3>
+                    <p>Converter moedas</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.getWorldTime()">
+                    <div class="tool-icon">🌍</div>
+                    <h3>Hora Mundial</h3>
+                    <p>Fuso horário</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.translate()">
+                    <div class="tool-icon">🌐</div>
+                    <h3>Tradutor</h3>
+                    <p>Traduzir texto</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.getQuote()">
+                    <div class="tool-icon">💭</div>
+                    <h3>Citações</h3>
+                    <p>Frases inspiradoras</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.searchWeb()">
+                    <div class="tool-icon">🔍</div>
+                    <h3>Busca Web</h3>
+                    <p>Pesquisar online</p>
+                </div>
+
+                <div class="tool-card" onclick="window.orsi.getJoke()">
+                    <div class="tool-icon">😄</div>
+                    <h3>Piadas</h3>
+                    <p>Uma risada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Config Tab -->
+        <div class="tab-content" id="config-tab">
+            <div class="config-section">
+                <h2>⚙️ Configurações</h2>
+                
+                <div class="config-group">
+                    <h3>🎨 Aparência</h3>
+                    <label class="switch-label">
+                        <span>Modo Escuro</span>
+                        <input type="checkbox" id="darkMode" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                    
+                    <label class="switch-label">
+                        <span>Animações</span>
+                        <input type="checkbox" id="animations" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <div class="config-group">
+                    <h3>🔊 Voz</h3>
+                    <label class="switch-label">
+                        <span>Resposta por Voz</span>
+                        <input type="checkbox" id="voiceResponse" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                    
+                    <label>
+                        <span>Volume</span>
+                        <input type="range" id="volume" min="0" max="100" value="80" class="volume-slider">
+                    </label>
+                </div>
+
+                <div class="config-group">
+                    <h3>🔑 APIs Personalizadas</h3>
+                    <p class="config-description">
+                        Adicione suas próprias chaves de API para recursos avançados
+                    </p>
+                    
+                    <div class="api-config">
+                        <label>OpenWeatherMap API Key</label>
+                        <input type="text" id="weatherApiKey" placeholder="Cole sua API key aqui">
+                        <a href="https://openweathermap.org/api" target="_blank" class="api-link">
+                            Obter chave gratuita →
+                        </a>
+                    </div>
+
+                    <div class="api-config">
+                        <label>NewsAPI Key</label>
+                        <input type="text" id="newsApiKey" placeholder="Cole sua API key aqui">
+                        <a href="https://newsapi.org/" target="_blank" class="api-link">
+                            Obter chave gratuita →
+                        </a>
+                    </div>
+
+                    <div class="api-config">
+                        <label>Outras APIs</label>
+                        <textarea id="customApis" placeholder='{"apiName": "sua_chave_aqui"}' rows="4"></textarea>
+                    </div>
+
+                    <button class="save-btn" onclick="window.orsi.saveConfig()">
+                        💾 Salvar Configurações
+                    </button>
+                </div>
+
+                <div class="config-group">
+                    <h3>📱 Instalação</h3>
+                    <p class="config-description">
+                        Instale o ORSI como um aplicativo no seu dispositivo
+                    </p>
+                    <button class="install-btn" id="installBtn">
+                        📥 Instalar como App
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab -->
+        <div class="tab-content" id="about-tab">
+            <div class="about-section">
+                <div class="about-hero">
+                    <span class="about-icon">🤖</span>
+                    <h2>ORSI</h2>
+                    <p class="version">Versão 1.0.0</p>
+                </div>
+
+                <div class="about-content">
+                    <h3>🎯 Sobre o Projeto</h3>
+                    <p>
+                        ORSI é seu assistente pessoal completo, desenvolvido para ser rápido, 
+                        prático e funcional. Inspirado nos melhores assistentes de IA, o ORSI 
+                        reúne diversas funcionalidades em uma única interface elegante.
+                    </p>
+
+                    <h3>✨ Funcionalidades</h3>
+                    <ul class="features-list">
+                        <li>💬 Chat interativo com comando de voz</li>
+                        <li>🌤️ Previsão do tempo em tempo real</li>
+                        <li>📰 Notícias atualizadas</li>
+                        <li>💱 Conversor de moedas</li>
+                        <li>🌐 Tradutor multilíngue</li>
+                        <li>🌍 Hora mundial</li>
+                        <li>🔍 Busca na web</li>
+                        <li>💭 Citações inspiradoras</li>
+                        <li>😄 Piadas e entretenimento</li>
+                        <li>📱 Instalável como PWA</li>
+                    </ul>
+
+                    <h3>🔧 Tecnologias</h3>
+                    <div class="tech-badges">
+                        <span class="badge">HTML5</span>
+                        <span class="badge">CSS3</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">PWA</span>
+                        <span class="badge">Web Speech API</span>
+                        <span class="badge">REST APIs</span>
+                    </div>
+
+                    <h3>📚 Guia Rápido</h3>
+                    <div class="guide-steps">
+                        <div class="guide-step">
+                            <span class="step-number">1</span>
+                            <p>Use o microfone 🎤 para comandos de voz</p>
+                        </div>
+                        <div class="guide-step">
+                            <span class="step-number">2</span>
+                            <p>Explore as ferramentas na aba 🛠️</p>
+                        </div>
+                        <div class="guide-step">
+                            <span class="step-number">3</span>
+                            <p>Configure APIs personalizadas em ⚙️</p>
+                        </div>
+                        <div class="guide-step">
+                            <span class="step-number">4</span>
+                            <p>Instale como app para acesso rápido</p>
+                        </div>
+                    </div>
+
+                    <h3>🚀 Próximas Atualizações</h3>
+                    <ul class="features-list">
+                        <li>🏠 Controle de dispositivos IoT</li>
+                        <li>📅 Calendário e lembretes</li>
+                        <li>📧 Integração com e-mail</li>
+                        <li>🎵 Controle de música</li>
+                        <li>🤖 IA conversacional avançada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

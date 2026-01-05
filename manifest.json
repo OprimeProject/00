@@ -1,0 +1,26 @@
+{
+  "name": "ORSI - Assistente Pessoal",
+  "short_name": "ORSI",
+  "description": "Seu assistente pessoal completo com comando de voz e inteligência artificial",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e27",
+  "theme_color": "#00d4ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='50' fill='%230a0e27'/><text x='50%' y='60%' font-size='280' text-anchor='middle' fill='%2300d4ff'>🤖</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'><rect width='1280' height='720' fill='%230a0e27'/></svg>",
+      "sizes": "1280x720",
+      "type": "image/svg+xml"
+    }
+  ]
+}
